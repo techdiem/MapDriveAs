@@ -1,0 +1,14 @@
+﻿<Window x:Class="MapDriveAs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MapDriveAs"
+        mc:Ignorable="d"
+        Title="MapDriveAs" Height="177" Width="412" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Icon="/Drive-icon.ico" KeyDown="Window_KeyDown">
+    <Grid>
+        <Button Click="Button_Click" Content="Laufwerk verbinden" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="164" Margin="10,85,0,0" FontSize="14" />
+        <TextBox x:Name="remoteHost" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="367" Height="23" FontSize="14"/>
+        <Label Content="Netzwerkadresse:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
