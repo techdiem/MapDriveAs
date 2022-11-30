@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Net;
+using System.Text;
 
 namespace MapDriveAs
 {
@@ -25,6 +26,13 @@ namespace MapDriveAs
         [DllImport("mpr.dll")]
         public static extern int WNetAddConnection2(NETRESOURCE netResource, string password, string username, int flags);
 
+        [DllImport("mpr.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern int WNetGetConnection([MarshalAs(UnmanagedType.LPTStr)] string localName, [MarshalAs(UnmanagedType.LPTStr)] StringBuilder remoteName, ref int length);
+
+        [DllImport("mpr.dll")]
+        static extern int WNetCancelConnection2(string lpName, int dwFlags, bool bForce);
+
+
         public static int MapNetworkDrive(string letter, string remoteName, NetworkCredential credentials)
         {
             string userName = string.IsNullOrEmpty(credentials.Domain)
@@ -43,6 +51,21 @@ namespace MapDriveAs
 
             int returnValue = WNetAddConnection2(myResource, credentials.Password, userName, 0);
             return returnValue;
+        }
+
+        public static int UnmountNetworkDrive(string letter)
+        {
+            int returnValue = WNetCancelConnection2(letter, 0, false);
+            return returnValue;
+        }
+
+        public static bool GetConnectionStatus([MarshalAs(UnmanagedType.LPTStr)] string letter) {
+            int bufferLenght = 260;
+            StringBuilder remoteName = new StringBuilder(bufferLenght);
+            int dwResult;
+            dwResult = WNetGetConnection(letter, remoteName, ref bufferLenght);
+            //Error Code 0 = NO_ERROR -> drive is mapped
+            return (dwResult == 0);
         }
 
         public static void ConnectAs(string letter, string sharePath)
