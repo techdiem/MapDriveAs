@@ -26,7 +26,7 @@ MapDriveAs.exe toggle "Y:" "\\filesrv.local\share"
 - `unmount` unmounts a share connected as the specified letter
 - `toggle` checks, if a share is mounted using this letter and unmounts it. When no share is connected, it mounts the specified network location.
 
-This tool is intented to be used in combination with for example macro software from your keyboard or AutoHotkey to bind a key to a network share.
+This tool is intented to be used in combination with for example macro software from your keyboard or [AutoHotkey](https://www.autohotkey.com/) to bind a key to a network share. But it can be used by anything capable of running commands.
 
 
 ## Credits
